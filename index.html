@@ -6,13 +6,7 @@
 <title>LOPA Construction ID Maker</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --pink:#F6E5EA; --pink-mid:#DDB8C5; --pink-deep:#B87A90;
-  --ink:#181818; --ink2:#4A4A4A; --ink3:#9A9A9A;
-  --bg:#F4F4F2; --white:#FFFFFF; --border:#E4E4E0;
-  --green:#4CAF7D; --blue:#1A73E8;
-  --cw:204px; --ch:360px;
-}
+:root{--pink:#F6E5EA;--pink-mid:#DDB8C5;--pink-deep:#B87A90;--ink:#181818;--ink2:#4A4A4A;--ink3:#9A9A9A;--bg:#F4F4F2;--white:#FFFFFF;--border:#E4E4E0;--green:#4CAF7D;--blue:#1A73E8;--cw:210px;--ch:370px}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--bg)}
 .shell{display:grid;grid-template-columns:390px 1fr;min-height:100vh}
@@ -37,74 +31,62 @@ input:focus{border-color:var(--pink-deep);background:#fff}
 .pill:hover{border-color:var(--pink-deep);color:var(--pink-deep);background:var(--pink)}
 .pill.on{background:var(--ink);color:#fff;border-color:var(--ink)}
 .hr{height:1px;background:var(--border)}
-.btn-gen{width:100%;padding:13px;background:var(--ink);color:#fff;border:none;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:3.5px;text-transform:uppercase;cursor:pointer;transition:background .2s,transform .1s}
-.btn-gen:hover{background:#2c2c2c;transform:translateY(-1px)}
-
-/* AUTH */
+.btn-gen{width:100%;padding:13px;background:var(--ink);color:#fff;border:none;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:3.5px;text-transform:uppercase;cursor:pointer}
+.btn-gen:hover{background:#2c2c2c}
 .auth-banner{margin:12px 26px 0;padding:12px 14px;border-radius:8px;font-size:12px;line-height:1.5}
 .auth-banner b{display:block;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:3px}
 .auth-banner.idle{background:#EEF4FB;border:1px solid #C5D9F0;color:#1A4A8A}
 .auth-banner.ok{background:#EBF7F0;border:1px solid #A8DCBE;color:#1A5C36}
 .auth-banner.err{background:#FDF0EF;border:1px solid #F0C4BE;color:#8A1A1A}
 .btn-auth{margin-top:8px;padding:8px 14px;background:var(--blue);color:#fff;border:none;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;width:100%}
-
-/* RIGHT */
 .R{display:flex;flex-direction:column;align-items:center;padding:32px 36px;gap:20px;overflow-y:auto}
 .R-label{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:var(--ink3);align-self:flex-start;font-weight:600}
 .empty{display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center;padding:60px 20px}
 .empty-icon{width:60px;height:60px;background:var(--pink);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px}
 .empty h3{font-family:'DM Serif Display',serif;font-size:19px;font-weight:400}
 .empty p{font-size:12.5px;color:var(--ink3);max-width:260px;line-height:1.65}
-
-/* TABS */
 .tabs{display:flex;gap:8px}
 .tab{padding:6px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);color:var(--ink2);font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
 .tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-
-/* FRONT CARD */
-.id-front{width:var(--cw);height:var(--ch);border-radius:8px;background:#fff;box-shadow:0 12px 40px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.08);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.id-front{width:var(--cw);height:var(--ch);border-radius:8px;background:#fff;box-shadow:0 12px 40px rgba(0,0,0,.15);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
 .f-topbar{height:3px;background:var(--ink);flex-shrink:0}
 .f-header{padding:8px 12px 7px;border-bottom:1px solid #F0EFED;display:flex;justify-content:space-between;align-items:flex-end;flex-shrink:0}
 .f-company{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ink);line-height:1}
 .f-sitetag{font-family:'Barlow Condensed',sans-serif;font-size:6.5px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3)}
 .f-proj{padding:3px 12px;background:#F9F9F8;border-bottom:1px solid #F0EFED;font-size:6.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);font-weight:500;flex-shrink:0}
-.f-body{flex:1;padding:10px 12px 0;display:flex;flex-direction:column;align-items:center;gap:8px;overflow:hidden}
-.f-photo{width:62px;height:76px;border-radius:4px;overflow:hidden;background:#FAF5F6;border:2px solid var(--pink-mid);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--ink3)}
+.f-body{flex:1;padding:10px 12px 0;display:flex;flex-direction:column;align-items:center;gap:7px;overflow:hidden}
+.f-photo{width:60px;height:74px;border-radius:4px;overflow:hidden;background:#FAF5F6;border:2px solid var(--pink-mid);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--ink3)}
 .f-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .f-namebox{text-align:center}
-.f-name{font-family:'Barlow Condensed',sans-serif;font-size:15px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);line-height:1.1}
+.f-name{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink);line-height:1.1}
 .f-roletag{display:inline-block;margin-top:3px;padding:2px 7px;border-radius:2px;background:var(--ink);color:#fff;font-size:6px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
 .f-rows{width:100%}
-.f-row{display:flex;justify-content:space-between;align-items:baseline;padding:3.5px 0;border-bottom:1px solid #F4F3F1;gap:6px}
+.f-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid #F4F3F1;gap:6px}
 .f-row:last-child{border-bottom:none}
 .f-key{font-size:6px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);flex-shrink:0}
-.f-val{font-size:7.5px;font-weight:500;color:var(--ink);text-align:right;line-height:1.2}
-.f-footer{margin-top:auto;border-top:1px solid #F0EFED;padding:6px 12px 4px;display:flex;justify-content:space-between;align-items:center;gap:4px;flex-shrink:0}
-.f-qr-row{border-top:1px solid #F0EFED;padding:6px 12px;display:flex;justify-content:center;align-items:center;background:#FAFAFA;flex-shrink:0}
-.f-idnum{font-family:'Barlow Condensed',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:2px;color:var(--ink)}
-.f-auth{display:flex;align-items:center;gap:3px;margin-top:3px;font-size:5.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)}
+.f-val{font-size:7px;font-weight:500;color:var(--ink);text-align:right;line-height:1.2}
+.f-footer{border-top:1px solid #F0EFED;padding:5px 12px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.f-idnum{font-family:'Barlow Condensed',sans-serif;font-size:8px;font-weight:700;letter-spacing:2px;color:var(--ink)}
+.f-auth{display:flex;align-items:center;gap:3px;margin-top:2px;font-size:5.5px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)}
 .dot{width:4px;height:4px;border-radius:50%;background:var(--green);animation:blink 2.4s infinite;flex-shrink:0}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+.f-qr-row{background:#F9F9F8;border-top:1px solid #F0EFED;display:flex;justify-content:center;align-items:center;padding:8px;flex-shrink:0}
+.f-qr-row canvas{display:block;image-rendering:pixelated}
 .f-bottombar{height:2px;background:var(--pink-mid);flex-shrink:0}
-
-/* BACK CARD */
-.id-back{width:var(--cw);height:var(--ch);border-radius:8px;background:var(--ink);box-shadow:0 12px 40px rgba(0,0,0,.15),0 2px 8px rgba(0,0,0,.08);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
+.id-back{width:var(--cw);height:var(--ch);border-radius:8px;background:var(--ink);box-shadow:0 12px 40px rgba(0,0,0,.15);display:flex;flex-direction:column;overflow:hidden;flex-shrink:0}
 .b-mag{height:32px;background:#0d0d0d;flex-shrink:0}
 .b-body{flex:1;display:flex;flex-direction:column;align-items:center;padding:12px 14px 10px;gap:8px}
 .b-lbl{font-family:'Barlow Condensed',sans-serif;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.b-body canvas{display:block;image-rendering:pixelated}
 .b-name{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:2px;color:#fff;text-transform:uppercase;text-align:center;line-height:1.2}
 .b-role{font-size:7px;letter-spacing:2px;color:var(--pink-deep);text-transform:uppercase;font-weight:500;text-align:center}
 .b-notice{font-size:6.5px;color:rgba(255,255,255,.18);text-align:center;line-height:1.65;padding:0 4px}
 .b-foot{background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.06);padding:7px 14px;text-align:center;margin-top:auto;flex-shrink:0}
 .b-foot-txt{font-family:'Barlow Condensed',sans-serif;font-size:7px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.35)}
-#qr-front canvas,#qr-back canvas{display:block}
-
-/* PANEL */
 .panel{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px 22px;width:100%;max-width:440px}
 .panel-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:14px;font-weight:600}
-.btn-upload{width:100%;padding:12px;border:none;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;margin-bottom:10px;transition:background .2s}
+.btn-upload{width:100%;padding:12px;border:none;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;margin-bottom:10px}
 .btn-upload.ready{background:var(--green);color:#fff}
-.btn-upload.ready:hover{background:#3d9e6d}
 .btn-upload.off{background:var(--ink3);color:#fff;cursor:not-allowed}
 .sbox{font-size:11px;padding:8px 12px;border-radius:6px;margin-bottom:10px;line-height:1.5;display:none}
 .sbox.show{display:block}
@@ -112,16 +94,13 @@ input:focus{border-color:var(--pink-deep);background:#fff}
 .sbox.done{background:#EBF7F0;border:1px solid #A8DCBE;color:#1A5C36}
 .sbox.err{background:#FDF0EF;border:1px solid #F0C4BE;color:#8A1A1A}
 .link-box{font-size:11px;padding:10px 12px;border-radius:6px;margin-bottom:10px;background:#EBF7F0;border:1px solid #A8DCBE;color:#1A5C36;display:none;line-height:1.6}
-.link-box a{color:#0F6E56;font-weight:600;text-decoration:none}
-.link-box a:hover{text-decoration:underline}
+.link-box a{color:#0F6E56;font-weight:600}
 .export-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding-top:12px;border-top:1px solid var(--border)}
-.btn-exp{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;border:1.5px solid var(--border);border-radius:7px;background:#fff;cursor:pointer;transition:all .13s}
+.btn-exp{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 8px;border:1.5px solid var(--border);border-radius:7px;background:#fff;cursor:pointer}
 .btn-exp:hover{border-color:var(--ink)}
 .btn-exp-icon{font-size:18px}
 .btn-exp-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink)}
-.btn-exp-sub{font-size:9.5px;color:var(--ink3);text-align:center}
-
-/* CID MODAL */
+.btn-exp-sub{font-size:9.5px;color:var(--ink3)}
 .overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center}
 .overlay.open{display:flex}
 .modal{background:#fff;border-radius:12px;padding:24px;width:460px;box-shadow:0 20px 60px rgba(0,0,0,.2)}
@@ -134,35 +113,20 @@ input:focus{border-color:var(--pink-deep);background:#fff}
 .modal-btns{display:flex;gap:10px}
 .modal-btns button{flex:1;padding:10px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer}
 .btn-ok{background:var(--blue);color:#fff;border:none}
-.btn-ok:hover{background:#1558B0}
 .btn-cancel{background:var(--bg);color:var(--ink2);border:1px solid var(--border)}
-
-@media print{
-  @page{size:54mm 85.6mm;margin:0}
-  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
-  body{background:#fff!important}
-  .L,.R-label,.panel,.tabs,.id-back{display:none!important}
-  .R{padding:0;display:block}
-  .id-front{width:54mm!important;height:85.6mm!important;border-radius:0!important;box-shadow:none!important}
-}
 </style>
 </head>
 <body>
 
-<!-- CID MODAL -->
 <div class="overlay" id="cidModal">
   <div class="modal">
     <h2>Connect Google Drive</h2>
-    <p>One-time setup. Your Client ID is saved in your browser.</p>
+    <p>One-time setup — saved in your browser after this.</p>
     <ol>
       <li>Go to <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a></li>
-      <li>Create project → Enable <strong>Google Drive API</strong></li>
-      <li><strong>Credentials → Create OAuth 2.0 Client ID</strong></li>
-      <li>Consent screen → External → App name: <strong>LOPA ID</strong> → Save</li>
-      <li>Add your Gmail as a <strong>Test User</strong></li>
-      <li>App type: <strong>Web application</strong></li>
-      <li>Authorized JavaScript origins: <code style="background:#F4F4F2;padding:2px 6px;border-radius:3px;color:var(--blue)">https://mereyes17.github.io</code></li>
-      <li>Create → copy <strong>Client ID</strong> below</li>
+      <li>Select your <strong>Lopa ID</strong> project</li>
+      <li>Credentials → OAuth Client ID → confirm origin is <code style="background:#f4f4f2;padding:2px 5px;border-radius:3px">https://mereyes17.github.io</code></li>
+      <li>Paste your Client ID below</li>
     </ol>
     <input type="text" id="cidInput" placeholder="xxxxxxxxxx.apps.googleusercontent.com">
     <div class="modal-btns">
@@ -173,20 +137,16 @@ input:focus{border-color:var(--pink-deep);background:#fff}
 </div>
 
 <div class="shell">
-
-  <!-- LEFT -->
   <aside class="L">
     <div class="L-head">
       <div class="eyebrow">LOPA Site Personnel</div>
       <h1>Construction ID Maker</h1>
     </div>
-
     <div class="auth-banner idle" id="authBanner">
       <b id="authTitle">🔗 Google Drive</b>
-      <span id="authMsg">Sign in to upload ID images to Drive and generate a scannable QR.</span>
+      <span id="authMsg">Sign in to upload card images to Drive and generate a scannable QR.</span>
       <button class="btn-auth" id="authBtn" onclick="handleSignIn()">Sign in with Google</button>
     </div>
-
     <div class="L-body">
       <div class="fg">
         <label>Photo</label>
@@ -196,12 +156,10 @@ input:focus{border-color:var(--pink-deep);background:#fff}
           <span id="puLbl">Click to upload photo</span>
         </div>
       </div>
-
       <div class="fr">
         <div class="fg"><label>First Name</label><input id="fn" placeholder="Juan"></div>
         <div class="fg"><label>Last Name</label><input id="ln" placeholder="dela Cruz"></div>
       </div>
-
       <div class="fg">
         <label>Role / Position</label>
         <div class="pills">
@@ -216,7 +174,6 @@ input:focus{border-color:var(--pink-deep);background:#fff}
         </div>
         <input id="roleInput" placeholder="Or type custom role…" style="margin-top:7px">
       </div>
-
       <div class="hr"></div>
       <div class="fg"><label>Company Name</label><input id="co" placeholder="LOPA Construction Corp."></div>
       <div class="fg"><label>Project / Site Name</label><input id="proj" placeholder="Metro Rail Extension Project"></div>
@@ -229,29 +186,22 @@ input:focus{border-color:var(--pink-deep);background:#fff}
         <div class="fg"><label>Valid Until</label><input type="date" id="vu"></div>
       </div>
       <div class="fg"><label>Emergency Contact</label><input id="ec" placeholder="Name — +63 9XX XXXX"></div>
-
       <button class="btn-gen" onclick="generate()">⚡ Generate ID Card</button>
     </div>
   </aside>
 
-  <!-- RIGHT -->
   <main class="R">
-    <div class="R-label">Preview · CR80 Portrait (54 × 85.6 mm)</div>
-
+    <div class="R-label">Preview · CR80 Portrait</div>
     <div class="empty" id="emptyState">
       <div class="empty-icon">🪖</div>
       <h3>No ID generated yet</h3>
-      <p>Sign in with Google, fill in the details, then click Generate.</p>
+      <p>Fill in the details and click Generate.</p>
     </div>
-
     <div id="previewWrap" style="display:none;flex-direction:column;align-items:center;gap:20px">
-
       <div class="tabs">
         <div class="tab on" id="tabFront" onclick="switchTab('front')">Front</div>
         <div class="tab" id="tabBack" onclick="switchTab('back')">Back</div>
       </div>
-
-      <!-- FRONT CARD -->
       <div class="id-front" id="cardFront">
         <div class="f-topbar"></div>
         <div class="f-header">
@@ -268,6 +218,7 @@ input:focus{border-color:var(--pink-deep);background:#fff}
           <div class="f-rows">
             <div class="f-row"><span class="f-key">ID No.</span><span class="f-val" id="c-id">—</span></div>
             <div class="f-row"><span class="f-key">Contact</span><span class="f-val" id="c-ct">—</span></div>
+            <div class="f-row"><span class="f-key">Issued</span><span class="f-val" id="c-is">—</span></div>
             <div class="f-row"><span class="f-key">Valid Until</span><span class="f-val" id="c-vl">—</span></div>
           </div>
         </div>
@@ -276,44 +227,29 @@ input:focus{border-color:var(--pink-deep);background:#fff}
             <div class="f-idnum" id="c-idn">ID</div>
             <div class="f-auth"><span class="dot"></span> Authorized</div>
           </div>
-          <div>
-            <div class="f-idnum" id="c-validity" style="font-size:5.5px;letter-spacing:1px;color:var(--ink3);font-weight:500;text-align:right"></div>
-          </div>
         </div>
-        <div class="f-qr-row">
-          <div id="qr-front"></div>
-        </div>
+        <div class="f-qr-row" id="qr-front-wrap"></div>
         <div class="f-bottombar"></div>
       </div>
-
-      <!-- BACK CARD -->
       <div class="id-back" id="cardBack" style="display:none">
         <div class="b-mag"></div>
         <div class="b-body">
           <div class="b-lbl">Scan to Verify Identity</div>
-          <div id="qr-back"></div>
+          <div id="qr-back-wrap"></div>
           <div class="b-name" id="b-nm">FULL NAME</div>
           <div class="b-role" id="b-rl">ROLE</div>
           <div class="b-notice">Property of issuing company. Unauthorized use prohibited.</div>
         </div>
         <div class="b-foot"><div class="b-foot-txt" id="b-co">COMPANY · SITE ID</div></div>
       </div>
-
-      <!-- PANEL -->
       <div class="panel">
         <div class="panel-title">Upload &amp; Export</div>
-
-        <button class="btn-upload off" id="uploadBtn" onclick="uploadAndQR()">
-          ☁ Upload to Drive &amp; Generate QR
-        </button>
-
+        <button class="btn-upload off" id="uploadBtn" onclick="uploadAndQR()">☁ Upload to Drive &amp; Generate QR</button>
         <div class="sbox" id="sbox"></div>
         <div class="link-box" id="linkBox"></div>
-
         <div id="noAuthNote" style="font-size:11px;color:var(--ink3);line-height:1.6;padding-bottom:10px;border-bottom:1px solid var(--border);margin-bottom:12px">
-          Sign in with Google first. Once signed in, clicking above uploads the front &amp; back card images to Drive and generates a QR that opens both on any phone.
+          Sign in with Google first to enable Drive upload.
         </div>
-
         <div class="export-grid">
           <button class="btn-exp" onclick="exportPNG('front')">
             <div class="btn-exp-icon">🖼</div>
@@ -332,400 +268,385 @@ input:focus{border-color:var(--pink-deep);background:#fff}
           </button>
         </div>
       </div>
-
-      <div style="font-size:10px;color:var(--ink3)">PNG exports are 638 × 1011 px at 300 dpi — exact CR80 for ID printers</div>
+      <div style="font-size:10px;color:var(--ink3)">PNG = 638 × 1011 px · 300 dpi · exact CR80 size</div>
     </div>
   </main>
 </div>
 
 <script src="https://accounts.google.com/gsi/client" async onload="gisReady=true"></script>
 <script>
-var photo=null, cur={}, qrText='', accessToken=null, tokenClient=null, gisReady=false;
-var FOLDER_ID='1rHgu7hLSmeDXWhxTzUNyLwfz76Tsg93C';
+/* ── QR ENCODER (verified working) ── */
+var QR = (function () {
+  var E = new Uint8Array(512), G = new Uint8Array(256);
+  (function () {
+    var x = 1;
+    for (var i = 0; i < 255; i++) { E[i] = x; G[x] = i; x = (x << 1) ^ (x & 0x80 ? 0x11D : 0); }
+    for (var i = 255; i < 512; i++) E[i] = E[i - 255];
+  })();
+  function mul(a, b) { return (a && b) ? E[G[a] + G[b]] : 0; }
+  function gp(n) {
+    var p = [1];
+    for (var i = 0; i < n; i++) {
+      var q = [1, E[i]], r = new Array(p.length + q.length - 1).fill(0);
+      for (var j = 0; j < p.length; j++) for (var k = 0; k < q.length; k++) r[j + k] ^= mul(p[j], q[k]);
+      p = r;
+    }
+    return p;
+  }
+  function rs(d, el) {
+    var g = gp(el), r = d.slice().concat(new Array(el).fill(0));
+    for (var i = 0; i < d.length; i++) { var c = r[i]; if (c) for (var j = 1; j <= el; j++) r[i + j] ^= mul(g[j], c); }
+    return r.slice(d.length);
+  }
+  var CAP = [0, 16, 28, 44, 64, 86, 108, 124, 154, 182, 216];
+  var ECB = [0, 10, 16, 26, 36, 24, 16, 18, 22, 22, 26];
+  var AL = [null, [], [], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50]];
 
-(function(){
-  var t=new Date();
-  document.getElementById('di').value=t.toISOString().slice(0,10);
-  var n=new Date(t);n.setFullYear(n.getFullYear()+1);
-  document.getElementById('vu').value=n.toISOString().slice(0,10);
-  var cid=localStorage.getItem('lopa_cid');
-  if(cid)document.getElementById('cidInput').value=cid;
+  function enc(text) {
+    var b = [];
+    for (var i = 0; i < text.length; i++) {
+      var c = text.charCodeAt(i);
+      if (c < 128) b.push(c);
+      else if (c < 0x800) { b.push(0xC0 | (c >> 6)); b.push(0x80 | (c & 63)); }
+      else { b.push(0xE0 | (c >> 12)); b.push(0x80 | ((c >> 6) & 63)); b.push(0x80 | (c & 63)); }
+    }
+    var ver = 1;
+    for (; ver <= 10; ver++) if (b.length + 2 <= CAP[ver]) break;
+    if (ver > 10) ver = 10;
+    var db = CAP[ver], eb = ECB[ver], bits = [];
+    function ab(v, n) { for (var i = n - 1; i >= 0; i--) bits.push((v >> i) & 1); }
+    ab(4, 4); ab(b.length, ver < 10 ? 8 : 16);
+    for (var i = 0; i < b.length; i++) ab(b[i], 8);
+    for (var i = 0; i < 4 && bits.length < db * 8; i++) bits.push(0);
+    while (bits.length % 8) bits.push(0);
+    var pads = [0xEC, 0x11];
+    for (var pi = 0; bits.length < db * 8; pi++) ab(pads[pi % 2], 8);
+    var data = [];
+    for (var i = 0; i < bits.length; i += 8) { var v = 0; for (var j = 0; j < 8; j++) v = (v << 1) | bits[i + j]; data.push(v); }
+    var ec = rs(data, eb), cw = data.concat(ec), cwb = [];
+    for (var i = 0; i < cw.length; i++) for (var j = 7; j >= 0; j--) cwb.push((cw[i] >> j) & 1);
+    var sz = ver * 4 + 17, mx = [];
+    for (var i = 0; i < sz; i++) mx.push(new Array(sz).fill(-1));
+    function s(r, c, v) { if (r >= 0 && r < sz && c >= 0 && c < sz) mx[r][c] = v; }
+    function finder(ro, co) {
+      for (var r = -1; r <= 7; r++) for (var c = -1; c <= 7; c++) {
+        var v = r < 0 || r == 7 || c < 0 || c == 7 ? 0 : r == 0 || r == 6 || c == 0 || c == 6 ? 1 : r >= 2 && r <= 4 && c >= 2 && c <= 4 ? 1 : 0;
+        s(ro + r, co + c, v);
+      }
+    }
+    finder(0, 0); finder(0, sz - 7); finder(sz - 7, 0);
+    for (var i = 8; i < sz - 8; i++) { s(6, i, i % 2 === 0 ? 1 : 0); s(i, 6, i % 2 === 0 ? 1 : 0); }
+    s(4 * ver + 9, 8, 1);
+    if (ver >= 2) {
+      var ap = AL[ver];
+      for (var ai = 0; ai < ap.length; ai++) for (var aj = 0; aj < ap.length; aj++) {
+        var ar = ap[ai], ac = ap[aj];
+        if (mx[ar][ac] !== -1) continue;
+        for (var dr = -2; dr <= 2; dr++) for (var dc = -2; dc <= 2; dc++)
+          s(ar + dr, ac + dc, Math.abs(dr) === 2 || Math.abs(dc) === 2 ? 1 : dr === 0 && dc === 0 ? 1 : 0);
+      }
+    }
+    var fc = [[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,7],[8,8],[7,8],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8],[8,sz-1],[8,sz-2],[8,sz-3],[8,sz-4],[8,sz-5],[8,sz-6],[8,sz-7],[sz-7,8],[sz-6,8],[sz-5,8],[sz-4,8],[sz-3,8],[sz-2,8],[sz-1,8]];
+    for (var i = 0; i < fc.length; i++) if (mx[fc[i][0]][fc[i][1]] === -1) s(fc[i][0], fc[i][1], 0);
+    var bit = 0, up = true;
+    for (var col = sz - 1; col >= 1; col -= 2) {
+      if (col === 6) col = 5;
+      for (var row = 0; row < sz; row++) {
+        var r = up ? sz - 1 - row : row;
+        for (var dc = 0; dc <= 1; dc++) {
+          var c = col - dc;
+          if (mx[r][c] === -1) { var bv = bit < cwb.length ? cwb[bit++] : 0; mx[r][c] = (r + c) % 2 === 0 ? bv ^ 1 : bv; }
+        }
+      }
+      up = !up;
+    }
+    for (var r = 0; r < sz; r++) for (var c = 0; c < sz; c++) if (mx[r][c] === -1) mx[r][c] = 0;
+    var fmt = [1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0];
+    var fl = [[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,7],[8,8],[7,8],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8]];
+    for (var i = 0; i < 15; i++) s(fl[i][0], fl[i][1], fmt[i]);
+    s(8, sz - 8, 1);
+    for (var i = 0; i < 7; i++) s(8, sz - 7 + i, fmt[14 - i]);
+    for (var i = 0; i < 8; i++) s(sz - 7 + i, 8, fmt[i < 7 ? i : 14]);
+    return { matrix: mx, size: sz };
+  }
+
+  function draw(id, text, px) {
+    var el = document.getElementById(id);
+    if (!el || !text) return;
+    el.innerHTML = '';
+    var res = enc(text), mat = res.matrix, sz = res.size, q = 4, tot = (sz + q * 2) * px;
+    var canvas = document.createElement('canvas');
+    canvas.width = tot; canvas.height = tot;
+    canvas.style.display = 'block'; canvas.style.imageRendering = 'pixelated';
+    var ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, tot, tot);
+    ctx.fillStyle = '#181818';
+    for (var r = 0; r < sz; r++) for (var c = 0; c < sz; c++)
+      if (mat[r][c] === 1) ctx.fillRect((c + q) * px, (r + q) * px, px, px);
+    el.appendChild(canvas);
+  }
+
+  function drawCtx(ctx, text, x, y, px) {
+    if (!text) return 0;
+    var res = enc(text), mat = res.matrix, sz = res.size, q = 4, tot = (sz + q * 2) * px;
+    ctx.fillStyle = '#fff'; ctx.fillRect(x, y, tot, tot);
+    ctx.fillStyle = '#181818';
+    for (var r = 0; r < sz; r++) for (var c = 0; c < sz; c++)
+      if (mat[r][c] === 1) ctx.fillRect(x + (c + q) * px, y + (r + q) * px, px, px);
+    return tot;
+  }
+
+  return { draw: draw, drawCtx: drawCtx };
+})();
+
+/* ── APP STATE ── */
+var photo = null, cur = {}, qrText = '', accessToken = null, tokenClient = null, gisReady = false;
+var FOLDER_ID = '1rHgu7hLSmeDXWhxTzUNyLwfz76Tsg93C';
+
+(function () {
+  var t = new Date();
+  document.getElementById('di').value = t.toISOString().slice(0, 10);
+  var n = new Date(t); n.setFullYear(n.getFullYear() + 1);
+  document.getElementById('vu').value = n.toISOString().slice(0, 10);
+  var cid = localStorage.getItem('lopa_cid');
+  if (cid) document.getElementById('cidInput').value = cid;
 })();
 
 /* ── AUTH ── */
-function handleSignIn(){
-  var cid=(localStorage.getItem('lopa_cid')||'').trim();
-  if(!cid){document.getElementById('cidModal').classList.add('open');return;}
+function handleSignIn() {
+  var cid = (localStorage.getItem('lopa_cid') || '').trim();
+  if (!cid) { document.getElementById('cidModal').classList.add('open'); return; }
   doSignIn(cid);
 }
-function doSignIn(cid){
-  if(!gisReady||!window.google?.accounts?.oauth2){setTimeout(function(){doSignIn(cid);},600);return;}
-  if(!tokenClient){
-    tokenClient=google.accounts.oauth2.initTokenClient({
-      client_id:cid,
-      scope:'https://www.googleapis.com/auth/drive.file',
-      callback:function(resp){
-        if(resp&&resp.access_token){
-          accessToken=resp.access_token;
-          setAuth('ok','✅ Connected! Ready to upload to your LOPA ID folder.');
+function doSignIn(cid) {
+  if (!gisReady || !window.google?.accounts?.oauth2) { setTimeout(function () { doSignIn(cid); }, 600); return; }
+  if (!tokenClient) {
+    tokenClient = google.accounts.oauth2.initTokenClient({
+      client_id: cid,
+      scope: 'https://www.googleapis.com/auth/drive.file',
+      callback: function (resp) {
+        if (resp && resp.access_token) {
+          accessToken = resp.access_token;
+          setAuth('ok', 'Connected! Ready to upload to your LOPA ID folder.');
           updateBtn();
-        }else{
-          setAuth('err','Sign-in failed. Check your Client ID and try again.');
+        } else {
+          setAuth('err', 'Sign-in failed. Check your Client ID and try again.');
         }
       }
     });
   }
   tokenClient.requestAccessToken();
 }
-function setAuth(state,msg){
-  var b=document.getElementById('authBanner');
-  b.className='auth-banner '+state;
-  document.getElementById('authTitle').textContent=state==='ok'?'✅ Google Drive Connected':state==='err'?'❌ Error':'🔗 Google Drive';
-  document.getElementById('authMsg').textContent=msg;
-  var btn=document.getElementById('authBtn');
-  if(state==='ok'){
-    btn.textContent='Sign Out';
-    btn.style.cssText='margin-top:6px;padding:6px 12px;background:transparent;border:1px solid #A8DCBE;border-radius:5px;font-size:11px;cursor:pointer;color:#1A5C36;width:100%';
-    btn.onclick=function(){accessToken=null;tokenClient=null;setAuth('idle','Sign in to upload ID images to Drive and generate a scannable QR.');updateBtn();};
-  }else{
-    btn.textContent='Sign in with Google';
-    btn.style.cssText='margin-top:8px;padding:8px 14px;background:var(--blue);color:#fff;border:none;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;width:100%';
-    btn.onclick=handleSignIn;
+function setAuth(state, msg) {
+  var b = document.getElementById('authBanner');
+  b.className = 'auth-banner ' + state;
+  document.getElementById('authTitle').textContent = state === 'ok' ? '✅ Google Drive Connected' : state === 'err' ? '❌ Error' : '🔗 Google Drive';
+  document.getElementById('authMsg').textContent = msg;
+  var btn = document.getElementById('authBtn');
+  if (state === 'ok') {
+    btn.textContent = 'Sign Out';
+    btn.style.cssText = 'margin-top:6px;padding:6px 12px;background:transparent;border:1px solid #A8DCBE;border-radius:5px;font-size:11px;cursor:pointer;color:#1A5C36;width:100%';
+    btn.onclick = function () { accessToken = null; tokenClient = null; setAuth('idle', 'Sign in to upload card images to Drive.'); updateBtn(); };
+  } else {
+    btn.textContent = 'Sign in with Google';
+    btn.style.cssText = 'margin-top:8px;padding:8px 14px;background:var(--blue);color:#fff;border:none;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;width:100%';
+    btn.onclick = handleSignIn;
   }
 }
-function saveCid(){
-  var cid=document.getElementById('cidInput').value.trim();
-  if(!cid){alert('Please paste your Client ID.');return;}
-  localStorage.setItem('lopa_cid',cid);
+function saveCid() {
+  var cid = document.getElementById('cidInput').value.trim();
+  if (!cid) { alert('Please paste your Client ID.'); return; }
+  localStorage.setItem('lopa_cid', cid);
   document.getElementById('cidModal').classList.remove('open');
-  tokenClient=null;doSignIn(cid);
+  tokenClient = null; doSignIn(cid);
 }
 
 /* ── FORM ── */
-function onPhoto(e){
-  var f=e.target.files[0];if(!f)return;
-  var r=new FileReader();
-  r.onload=function(ev){
-    photo=ev.target.result;
-    document.getElementById('puIcon').innerHTML='<img src="'+photo+'" alt="">';
-    document.getElementById('puLbl').textContent='Photo loaded ✓';
+function onPhoto(e) {
+  var f = e.target.files[0]; if (!f) return;
+  var r = new FileReader();
+  r.onload = function (ev) {
+    photo = ev.target.result;
+    document.getElementById('puIcon').innerHTML = '<img src="' + photo + '" alt="">';
+    document.getElementById('puLbl').textContent = 'Photo loaded ✓';
   };
   r.readAsDataURL(f);
 }
-function pickRole(el,role){
-  document.querySelectorAll('.pill').forEach(function(p){p.classList.remove('on');});
-  el.classList.add('on');document.getElementById('roleInput').value=role;
+function pickRole(el, role) {
+  document.querySelectorAll('.pill').forEach(function (p) { p.classList.remove('on'); });
+  el.classList.add('on');
+  document.getElementById('roleInput').value = role;
 }
-function gv(id){return document.getElementById(id).value.trim();}
-function st(id,t){document.getElementById(id).textContent=t;}
-function fmtDate(s){if(!s)return'—';var d=new Date(s+'T00:00:00');return d.toLocaleDateString('en-PH',{month:'short',day:'2-digit',year:'numeric'});}
+function gv(id) { return document.getElementById(id).value.trim(); }
+function st(id, t) { document.getElementById(id).textContent = t; }
+function fmtDate(s) {
+  if (!s) return '—';
+  var d = new Date(s + 'T00:00:00');
+  return d.toLocaleDateString('en-PH', { month: 'short', day: '2-digit', year: 'numeric' });
+}
 
-function generate(){
-  var fn=gv('fn'),ln=gv('ln');
-  var role=gv('roleInput')||'Construction Worker';
-  var company=gv('co')||'LOPA Construction';
-  var project=gv('proj')||'Construction Site';
-  var empId=gv('eid')||('LOPA-'+Date.now().toString(36).toUpperCase().slice(-6));
-  var contact=gv('ct')||'—';
-  var issued=gv('di'),valid=gv('vu');
-  var emerg=gv('ec')||'Not provided';
-  var name=(fn+' '+ln).trim().toUpperCase()||'FULL NAME';
-  cur={name,role,company,project,empId,contact,issued,valid,emerg,photo};
-  qrText='ID:'+empId+' | '+name;
-
-  st('c-co',company.toUpperCase());st('c-proj',project.toUpperCase());
-  st('c-nm',name);st('c-rl',role.toUpperCase());
-  st('c-id',empId);st('c-ct',contact);
-  st('c-is',fmtDate(issued));st('c-vl',valid?fmtDate(valid):'—');
-  st('c-idn',empId);st('b-nm',name);st('b-rl',role.toUpperCase());
-  st('b-co',company.toUpperCase()+' · SITE ID');
-
-  var ph=document.getElementById('c-ph');
-  if(photo){ph.innerHTML='<img src="'+photo+'" style="width:100%;height:100%;object-fit:cover;display:block">';ph.style.fontSize='0';}
-  else{ph.innerHTML='👷';ph.style.fontSize='';}
-
-  drawQR('qr-front',qrText,5);
-  drawQR('qr-back',qrText,6);
-  document.getElementById('emptyState').style.display='none';
-  document.getElementById('previewWrap').style.display='flex';
-  document.getElementById('sbox').className='sbox';
-  document.getElementById('linkBox').style.display='none';
+function generate() {
+  var fn = gv('fn'), ln = gv('ln');
+  var role = gv('roleInput') || 'Construction Worker';
+  var company = gv('co') || 'LOPA Construction';
+  var project = gv('proj') || 'Construction Site';
+  var empId = gv('eid') || ('LOPA-' + Date.now().toString(36).toUpperCase().slice(-6));
+  var contact = gv('ct') || '—';
+  var issued = gv('di'), valid = gv('vu');
+  var emerg = gv('ec') || 'Not provided';
+  var name = (fn + ' ' + ln).trim().toUpperCase() || 'FULL NAME';
+  cur = { name: name, role: role, company: company, project: project, empId: empId, contact: contact, issued: issued, valid: valid, emerg: emerg, photo: photo };
+  qrText = 'LOPA:' + empId + '|' + name;
+  st('c-co', company.toUpperCase()); st('c-proj', project.toUpperCase());
+  st('c-nm', name); st('c-rl', role.toUpperCase());
+  st('c-id', empId); st('c-ct', contact);
+  st('c-is', fmtDate(issued)); st('c-vl', valid ? fmtDate(valid) : '—');
+  st('c-idn', empId); st('b-nm', name); st('b-rl', role.toUpperCase());
+  st('b-co', company.toUpperCase() + ' · SITE ID');
+  var ph = document.getElementById('c-ph');
+  if (photo) { ph.innerHTML = '<img src="' + photo + '" style="width:100%;height:100%;object-fit:cover;display:block">'; ph.style.fontSize = '0'; }
+  else { ph.innerHTML = '👷'; ph.style.fontSize = ''; }
+  QR.draw('qr-front-wrap', qrText, 4);
+  QR.draw('qr-back-wrap', qrText, 6);
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('previewWrap').style.display = 'flex';
+  document.getElementById('sbox').className = 'sbox';
+  document.getElementById('linkBox').style.display = 'none';
   updateBtn();
 }
 
-function switchTab(t){
-  document.getElementById('cardFront').style.display=t==='front'?'flex':'none';
-  document.getElementById('cardBack').style.display=t==='back'?'flex':'none';
-  document.getElementById('tabFront').className='tab'+(t==='front'?' on':'');
-  document.getElementById('tabBack').className='tab'+(t==='back'?' on':'');
+function switchTab(t) {
+  document.getElementById('cardFront').style.display = t === 'front' ? 'flex' : 'none';
+  document.getElementById('cardBack').style.display = t === 'back' ? 'flex' : 'none';
+  document.getElementById('tabFront').className = 'tab' + (t === 'front' ? ' on' : '');
+  document.getElementById('tabBack').className = 'tab' + (t === 'back' ? ' on' : '');
+}
+function updateBtn() {
+  var btn = document.getElementById('uploadBtn'), note = document.getElementById('noAuthNote');
+  if (accessToken) { btn.className = 'btn-upload ready'; btn.textContent = '☁ Upload to Drive & Generate QR'; note.style.display = 'none'; }
+  else { btn.className = 'btn-upload off'; btn.textContent = '☁ Sign in first to upload'; note.style.display = 'block'; }
 }
 
-function updateBtn(){
-  var btn=document.getElementById('uploadBtn');
-  var note=document.getElementById('noAuthNote');
-  if(accessToken){
-    btn.className='btn-upload ready';
-    btn.textContent='☁ Upload to Drive & Generate QR';
-    note.style.display='none';
-  }else{
-    btn.className='btn-upload off';
-    btn.textContent='☁ Sign in first to upload';
-    note.style.display='block';
-  }
-}
-
-/* ════════════════════════════════════════════════════════
-   UPLOAD FRONT + BACK PNGs TO DRIVE
-   Then create a subfolder for this person and get a
-   shareable folder link — QR encodes that folder link.
-   When scanned, Drive shows both images on one page.
-   ════════════════════════════════════════════════════════ */
-async function uploadAndQR(){
-  if(!accessToken){handleSignIn();return;}
-  if(!cur.name){alert('Generate an ID first.');return;}
-
-  showStat('uploading','⏳ Rendering cards and uploading to Google Drive…');
-
-  try{
-    /* Step 1: Render both cards to canvas at 300dpi */
-    var frontPng = await renderCardPNG('front');
-    var backPng  = await renderCardPNG('back');
-
-    /* Step 2: Create a subfolder inside LOPA ID folder */
-    var folderName = cur.empId+' — '+cur.name;
-    var folderId = await createDriveFolder(folderName);
-
-    /* Step 3: Upload both PNGs into that subfolder */
-    showStat('uploading','⏳ Uploading front card image…');
-    await uploadPNG(frontPng, cur.empId+'-FRONT.png', folderId);
-
-    showStat('uploading','⏳ Uploading back card image…');
-    await uploadPNG(backPng, cur.empId+'-BACK.png', folderId);
-
-    /* Step 4: Make folder public */
-    await makePublic(folderId);
-
-    /* Step 5: QR encodes the folder link — opens in Drive showing both images */
-    var folderLink = 'https://drive.google.com/drive/folders/'+folderId;
-    qrText = folderLink;
-    drawQR('qr-front', qrText, 5);
-    drawQR('qr-back',  qrText, 6);
-
-    showStat('done','✅ Done! Both card images uploaded. QR opens a page showing front & back on any phone.');
-    var lb=document.getElementById('linkBox');
-    lb.innerHTML='<strong>📁 Drive folder:</strong> <a href="'+folderLink+'" target="_blank">Open to preview ↗</a><br><span style="font-size:10px;opacity:.7">Scan the QR — it opens this folder showing both ID images.</span>';
-    lb.style.display='block';
+/* ── UPLOAD ── */
+async function uploadAndQR() {
+  if (!accessToken) { handleSignIn(); return; }
+  if (!cur.name) { alert('Generate an ID first.'); return; }
+  showStat('uploading', '⏳ Rendering card images…');
+  try {
+    var fp = await renderPNG('front'), bp = await renderPNG('back');
+    showStat('uploading', '⏳ Creating Drive folder…');
+    var fid = await createFolder(cur.empId + ' — ' + cur.name);
+    showStat('uploading', '⏳ Uploading front…');
+    await uploadPNG(fp, cur.empId + '-FRONT.png', fid);
+    showStat('uploading', '⏳ Uploading back…');
+    await uploadPNG(bp, cur.empId + '-BACK.png', fid);
+    await makePublic(fid);
+    var link = 'https://drive.google.com/drive/folders/' + fid;
+    qrText = link;
+    QR.draw('qr-front-wrap', qrText, 4);
+    QR.draw('qr-back-wrap', qrText, 6);
+    showStat('done', '✅ Done! Scan the QR — opens a Drive folder with both ID card images.');
+    var lb = document.getElementById('linkBox');
+    lb.innerHTML = '<strong>Drive folder:</strong> <a href="' + link + '" target="_blank">Open to preview ↗</a>';
+    lb.style.display = 'block';
     updateBtn();
-
-  }catch(e){
-    showStat('err','❌ '+e.message+'. Please sign in again.');
-    accessToken=null;tokenClient=null;setAuth('idle');updateBtn();
+  } catch (e) {
+    showStat('err', '❌ ' + e.message + ' — please sign in again.');
+    accessToken = null; tokenClient = null; setAuth('idle'); updateBtn();
   }
 }
-
-/* ── Drive API helpers ── */
-async function createDriveFolder(name){
-  var res=await fetch('https://www.googleapis.com/drive/v3/files?fields=id',{
-    method:'POST',
-    headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},
-    body:JSON.stringify({name:name,mimeType:'application/vnd.google-apps.folder',parents:[FOLDER_ID]})
-  });
-  if(!res.ok)throw new Error('Could not create folder (HTTP '+res.status+')');
-  var d=await res.json();
-  if(!d.id)throw new Error('No folder ID returned');
-  return d.id;
+async function createFolder(name) {
+  var res = await fetch('https://www.googleapis.com/drive/v3/files?fields=id', { method: 'POST', headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, mimeType: 'application/vnd.google-apps.folder', parents: [FOLDER_ID] }) });
+  if (!res.ok) throw new Error('Folder creation failed (HTTP ' + res.status + ')');
+  var d = await res.json(); if (!d.id) throw new Error('No folder ID'); return d.id;
 }
-
-async function uploadPNG(dataUrl, filename, parentId){
-  /* Convert base64 data URL to binary */
-  var base64=dataUrl.split(',')[1];
-  var binary=atob(base64);
-  var bytes=new Uint8Array(binary.length);
-  for(var i=0;i<binary.length;i++)bytes[i]=binary.charCodeAt(i);
-  var blob=new Blob([bytes],{type:'image/png'});
-
-  var boundary='lopaid_'+Date.now();
-  var meta=JSON.stringify({name:filename,parents:[parentId],mimeType:'image/png'});
-
-  /* Use multipart upload */
-  var formData=new FormData();
-  formData.append('metadata',new Blob([meta],{type:'application/json'}));
-  formData.append('file',blob);
-
-  var res=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',{
-    method:'POST',
-    headers:{'Authorization':'Bearer '+accessToken},
-    body:formData
-  });
-  if(!res.ok)throw new Error('Upload failed (HTTP '+res.status+')');
-  var d=await res.json();
-  if(!d.id)throw new Error('No file ID returned');
-  return d.id;
+async function uploadPNG(dataUrl, filename, parentId) {
+  var b64 = dataUrl.split(',')[1], bin = atob(b64), bytes = new Uint8Array(bin.length);
+  for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  var blob = new Blob([bytes], { type: 'image/png' });
+  var meta = new Blob([JSON.stringify({ name: filename, parents: [parentId], mimeType: 'image/png' })], { type: 'application/json' });
+  var form = new FormData(); form.append('metadata', meta); form.append('file', blob);
+  var res = await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id', { method: 'POST', headers: { 'Authorization': 'Bearer ' + accessToken }, body: form });
+  if (!res.ok) throw new Error('Upload failed (HTTP ' + res.status + ')');
 }
+async function makePublic(id) {
+  await fetch('https://www.googleapis.com/drive/v3/files/' + id + '/permissions', { method: 'POST', headers: { 'Authorization': 'Bearer ' + accessToken, 'Content-Type': 'application/json' }, body: JSON.stringify({ role: 'reader', type: 'anyone' }) });
+}
+function showStat(type, msg) { var b = document.getElementById('sbox'); b.className = 'sbox show ' + type; b.textContent = msg; }
 
-async function makePublic(fileOrFolderId){
-  await fetch('https://www.googleapis.com/drive/v3/files/'+fileOrFolderId+'/permissions',{
-    method:'POST',
-    headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},
-    body:JSON.stringify({role:'reader',type:'anyone'})
+/* ── CANVAS RENDERING ── */
+function renderPNG(side) {
+  return new Promise(function (resolve, reject) {
+    var W = 638, H = 1011, sx = W / 210, sy = H / 370;
+    var canvas = document.createElement('canvas'); canvas.width = W; canvas.height = H;
+    var ctx = canvas.getContext('2d');
+    function go(img) { try { side === 'front' ? drawF(ctx, W, H, sx, sy, img) : drawB(ctx, W, H, sx, sy); resolve(canvas.toDataURL('image/png')); } catch (e) { reject(e); } }
+    if (cur.photo && side === 'front') { var img = new Image(); img.onload = function () { go(img); }; img.onerror = function () { go(null); }; img.src = cur.photo; }
+    else go(null);
   });
 }
-
-function showStat(type,msg){
-  var b=document.getElementById('sbox');
-  b.className='sbox show '+type;
-  b.textContent=msg;
+function exportPNG(side) {
+  if (!cur.name) { alert('Generate an ID first.'); return; }
+  renderPNG(side).then(function (url) { var a = document.createElement('a'); a.download = 'LOPA-ID-' + cur.empId + '-' + side.toUpperCase() + '.png'; a.href = url; a.click(); });
 }
-
-/* ── Render card to PNG data URL ── */
-function renderCardPNG(side){
-  return new Promise(function(resolve,reject){
-    var W=638,H=1011,sx=W/204,sy=H/324;
-    var canvas=document.createElement('canvas');
-    canvas.width=W;canvas.height=H;
-    var ctx=canvas.getContext('2d');
-    function go(img){
-      try{
-        if(side==='front')drawFront(ctx,W,H,sx,sy,img);
-        else drawBack(ctx,W,H,sx,sy);
-        resolve(canvas.toDataURL('image/png'));
-      }catch(e){reject(e);}
-    }
-    if(cur.photo&&side==='front'){
-      var img=new Image();
-      img.onload=function(){go(img);};
-      img.onerror=function(){go(null);};
-      img.src=cur.photo;
-    }else{go(null);}
-  });
+function sc(v, s) { return Math.round(v * s); }
+function rr(ctx, x, y, w, h, rad) {
+  ctx.beginPath(); ctx.moveTo(x + rad, y); ctx.lineTo(x + w - rad, y); ctx.arcTo(x + w, y, x + w, y + rad, rad);
+  ctx.lineTo(x + w, y + h - rad); ctx.arcTo(x + w, y + h, x + w - rad, y + h, rad);
+  ctx.lineTo(x + rad, y + h); ctx.arcTo(x, y + h, x, y + h - rad, rad);
+  ctx.lineTo(x, y + rad); ctx.arcTo(x, y, x + rad, y, rad); ctx.closePath();
 }
-
-/* ── PNG export (download) ── */
-function exportPNG(side){
-  if(!cur.name){alert('Generate an ID first.');return;}
-  renderCardPNG(side).then(function(dataUrl){
-    var a=document.createElement('a');
-    a.download='LOPA-ID-'+cur.empId+'-'+side.toUpperCase()+'.png';
-    a.href=dataUrl;a.click();
-  });
-}
-
-/* ── Canvas drawing ── */
-function sc(v,s){return Math.round(v*s);}
-function rr(ctx,x,y,w,h,rad){
-  ctx.beginPath();ctx.moveTo(x+rad,y);ctx.lineTo(x+w-rad,y);ctx.arcTo(x+w,y,x+w,y+rad,rad);
-  ctx.lineTo(x+w,y+h-rad);ctx.arcTo(x+w,y+h,x+w-rad,y+h,rad);
-  ctx.lineTo(x+rad,y+h);ctx.arcTo(x,y+h,x,y+h-rad,rad);
-  ctx.lineTo(x,y+rad);ctx.arcTo(x,y,x+rad,y,rad);ctx.closePath();
-}
-function drawQRC(ctx,text,x,y,px){
-  if(!text)return;
-  try{
-    var res=buildQRMatrix(text),mat=res.matrix,sz=res.size,q=4,tot=(sz+q*2)*px;
-    ctx.fillStyle='#fff';ctx.fillRect(x,y,tot,tot);ctx.fillStyle='#181818';
-    for(var r=0;r<sz;r++)for(var c=0;c<sz;c++)if(mat[r][c]===1)ctx.fillRect(x+(c+q)*px,y+(r+q)*px,px,px);
-  }catch(e){}
-}
-
-function drawFront(ctx,W,H,sx,sy,img){
-  ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);
-  ctx.fillStyle='#181818';ctx.fillRect(0,0,W,sc(3,sy));
-  var hY=sc(3,sy);
-  ctx.fillStyle='#181818';ctx.font='700 '+sc(10,sy)+'px sans-serif';ctx.fillText(cur.company.toUpperCase(),sc(12,sx),hY+sc(17,sy));
-  ctx.fillStyle='#9A9A9A';ctx.font='600 '+sc(6.5,sy)+'px sans-serif';ctx.textAlign='right';ctx.fillText('SITE ID',W-sc(12,sx),hY+sc(17,sy));ctx.textAlign='left';
-  ctx.fillStyle='#F0EFED';ctx.fillRect(0,hY+sc(26,sy),W,1);
-  var pY=hY+sc(27,sy);ctx.fillStyle='#F9F9F8';ctx.fillRect(0,pY,W,sc(12,sy));
-  ctx.fillStyle='#9A9A9A';ctx.font='600 '+sc(6.5,sy)+'px sans-serif';ctx.fillText(cur.project.toUpperCase(),sc(12,sx),pY+sc(9,sy));
-  ctx.fillStyle='#F0EFED';ctx.fillRect(0,pY+sc(12,sy),W,1);
-  var bY=pY+sc(23,sy),phW=sc(62,sx),phH=sc(76,sy),phX=Math.round((W-phW)/2);
-  ctx.fillStyle='#FAF5F6';ctx.strokeStyle='#DDB8C5';ctx.lineWidth=sc(2,sx);
-  rr(ctx,phX,bY,phW,phH,sc(4,sx));ctx.fill();ctx.stroke();
-  if(img){ctx.save();rr(ctx,phX,bY,phW,phH,sc(4,sx));ctx.clip();ctx.drawImage(img,phX,bY,phW,phH);ctx.restore();}
-  var nY=bY+phH+sc(10,sy);ctx.fillStyle='#181818';ctx.font='600 '+sc(15,sy)+'px sans-serif';ctx.textAlign='center';ctx.fillText(cur.name,W/2,nY);
-  var tY=nY+sc(7,sy);ctx.font='600 '+sc(6,sy)+'px sans-serif';
-  var tw=ctx.measureText(cur.role.toUpperCase()).width+sc(14,sx);
-  ctx.fillStyle='#181818';ctx.fillRect(W/2-tw/2,tY,tw,sc(12,sy));
-  ctx.fillStyle='#fff';ctx.fillText(cur.role.toUpperCase(),W/2,tY+sc(9,sy));ctx.textAlign='left';
-  var rows=[['ID NO.',cur.empId],['CONTACT',cur.contact],['ISSUED',fmtDate(cur.issued)],['VALID UNTIL',fmtDate(cur.valid)]];
-  var rowY=tY+sc(18,sy);
-  for(var i=0;i<rows.length;i++){
-    ctx.fillStyle='#9A9A9A';ctx.font='600 '+sc(6,sy)+'px sans-serif';ctx.fillText(rows[i][0],sc(12,sx),rowY+sc(9,sy));
-    ctx.fillStyle='#181818';ctx.font='500 '+sc(7.5,sy)+'px sans-serif';ctx.textAlign='right';ctx.fillText(rows[i][1],W-sc(12,sx),rowY+sc(9,sy));ctx.textAlign='left';
-    if(i<rows.length-1){ctx.fillStyle='#F4F3F1';ctx.fillRect(sc(12,sx),rowY+sc(13,sy),W-sc(24,sx),1);}
-    rowY+=sc(14,sy);
+function drawF(ctx, W, H, sx, sy, img) {
+  ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#181818'; ctx.fillRect(0, 0, W, sc(3, sy));
+  var hY = sc(3, sy);
+  ctx.fillStyle = '#181818'; ctx.font = '700 ' + sc(10, sy) + 'px sans-serif'; ctx.fillText(cur.company.toUpperCase(), sc(12, sx), hY + sc(17, sy));
+  ctx.fillStyle = '#9A9A9A'; ctx.font = '600 ' + sc(6.5, sy) + 'px sans-serif'; ctx.textAlign = 'right'; ctx.fillText('SITE ID', W - sc(12, sx), hY + sc(17, sy)); ctx.textAlign = 'left';
+  ctx.fillStyle = '#F0EFED'; ctx.fillRect(0, hY + sc(26, sy), W, 1);
+  var pY = hY + sc(27, sy); ctx.fillStyle = '#F9F9F8'; ctx.fillRect(0, pY, W, sc(12, sy));
+  ctx.fillStyle = '#9A9A9A'; ctx.font = '600 ' + sc(6.5, sy) + 'px sans-serif'; ctx.fillText(cur.project.toUpperCase(), sc(12, sx), pY + sc(9, sy));
+  ctx.fillStyle = '#F0EFED'; ctx.fillRect(0, pY + sc(12, sy), W, 1);
+  var bY = pY + sc(20, sy), phW = sc(60, sx), phH = sc(74, sy), phX = Math.round((W - phW) / 2);
+  ctx.fillStyle = '#FAF5F6'; ctx.strokeStyle = '#DDB8C5'; ctx.lineWidth = sc(2, sx);
+  rr(ctx, phX, bY, phW, phH, sc(4, sx)); ctx.fill(); ctx.stroke();
+  if (img) { ctx.save(); rr(ctx, phX, bY, phW, phH, sc(4, sx)); ctx.clip(); ctx.drawImage(img, phX, bY, phW, phH); ctx.restore(); }
+  var nY = bY + phH + sc(10, sy);
+  ctx.fillStyle = '#181818'; ctx.font = '600 ' + sc(14, sy) + 'px sans-serif'; ctx.textAlign = 'center'; ctx.fillText(cur.name, W / 2, nY);
+  var tY = nY + sc(7, sy); ctx.font = '600 ' + sc(6, sy) + 'px sans-serif';
+  var tw = ctx.measureText(cur.role.toUpperCase()).width + sc(14, sx);
+  ctx.fillStyle = '#181818'; ctx.fillRect(W / 2 - tw / 2, tY, tw, sc(12, sy));
+  ctx.fillStyle = '#fff'; ctx.fillText(cur.role.toUpperCase(), W / 2, tY + sc(9, sy)); ctx.textAlign = 'left';
+  var rows = [['ID NO.', cur.empId], ['CONTACT', cur.contact], ['ISSUED', fmtDate(cur.issued)], ['VALID UNTIL', fmtDate(cur.valid)]], rowY = tY + sc(17, sy);
+  for (var i = 0; i < rows.length; i++) {
+    ctx.fillStyle = '#9A9A9A'; ctx.font = '600 ' + sc(6, sy) + 'px sans-serif'; ctx.fillText(rows[i][0], sc(12, sx), rowY + sc(9, sy));
+    ctx.fillStyle = '#181818'; ctx.font = '500 ' + sc(7, sy) + 'px sans-serif'; ctx.textAlign = 'right'; ctx.fillText(rows[i][1], W - sc(12, sx), rowY + sc(9, sy)); ctx.textAlign = 'left';
+    if (i < rows.length - 1) { ctx.fillStyle = '#F4F3F1'; ctx.fillRect(sc(12, sx), rowY + sc(12, sy), W - sc(24, sx), 1); }
+    rowY += sc(13, sy);
   }
-  var fY=H-sc(34,sy);ctx.fillStyle='#F0EFED';ctx.fillRect(0,fY,W,1);
-  ctx.fillStyle='#181818';ctx.font='700 '+sc(8.5,sy)+'px sans-serif';ctx.fillText(cur.empId,sc(12,sx),fY+sc(13,sy));
-  ctx.fillStyle='#4CAF7D';ctx.beginPath();ctx.arc(sc(12,sx)+sc(3,sx),fY+sc(24,sy),sc(3,sy),0,Math.PI*2);ctx.fill();
-  ctx.font='600 '+sc(5.5,sy)+'px sans-serif';ctx.fillText('AUTHORIZED',sc(12,sx)+sc(9,sx),fY+sc(26,sy));
-  var qrPx=sc(3,sx),qrSz=(21+8)*qrPx;
-  drawQRC(ctx,qrText,W-sc(12,sx)-qrSz,fY+sc(3,sy),qrPx);
-  ctx.fillStyle='#DDB8C5';ctx.fillRect(0,H-sc(2,sy),W,sc(2,sy));
+  var fY = rowY + sc(5, sy);
+  ctx.fillStyle = '#F0EFED'; ctx.fillRect(0, fY, W, 1);
+  ctx.fillStyle = '#181818'; ctx.font = '700 ' + sc(8, sy) + 'px sans-serif'; ctx.fillText(cur.empId, sc(12, sx), fY + sc(13, sy));
+  ctx.fillStyle = '#4CAF7D'; ctx.beginPath(); ctx.arc(sc(12, sx) + sc(3, sx), fY + sc(23, sy), sc(3, sy), 0, Math.PI * 2); ctx.fill();
+  ctx.font = '600 ' + sc(5.5, sy) + 'px sans-serif'; ctx.fillText('AUTHORIZED', sc(12, sx) + sc(9, sx), fY + sc(25, sy));
+  var qrY = fY + sc(32, sy);
+  ctx.fillStyle = '#F9F9F8'; ctx.fillRect(0, qrY, W, H - qrY - sc(2, sy));
+  ctx.fillStyle = '#F0EFED'; ctx.fillRect(0, qrY, W, 1);
+  var qrPx = sc(4, sx), qrSz = QR.drawCtx(ctx, qrText, 0, 0, qrPx);
+  var qrX = Math.round((W - qrSz) / 2), qrYc = qrY + Math.round(((H - sc(2, sy) - qrY) - qrSz) / 2);
+  QR.drawCtx(ctx, qrText, qrX, qrYc, qrPx);
+  ctx.fillStyle = '#DDB8C5'; ctx.fillRect(0, H - sc(2, sy), W, sc(2, sy));
 }
-
-function drawBack(ctx,W,H,sx,sy){
-  ctx.fillStyle='#181818';ctx.fillRect(0,0,W,H);
-  ctx.fillStyle='#0d0d0d';ctx.fillRect(0,0,W,sc(38,sy));
-  var qrPx=sc(4,sx),qrSz=(21+8)*qrPx,qX=Math.round((W-qrSz)/2);
-  drawQRC(ctx,qrText,qX,sc(50,sy),qrPx);
-  ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='600 '+sc(7,sy)+'px sans-serif';ctx.textAlign='center';
-  ctx.fillText('SCAN TO VERIFY IDENTITY',W/2,sc(50,sy)+qrSz+sc(14,sy));
-  ctx.fillStyle='#fff';ctx.font='600 '+sc(12,sy)+'px sans-serif';ctx.fillText(cur.name,W/2,sc(50,sy)+qrSz+sc(28,sy));
-  ctx.fillStyle='#B87A90';ctx.font='500 '+sc(7,sy)+'px sans-serif';ctx.fillText(cur.role.toUpperCase(),W/2,sc(50,sy)+qrSz+sc(40,sy));
-  ctx.fillStyle='rgba(255,255,255,.35)';ctx.font='600 '+sc(7,sy)+'px sans-serif';
-  ctx.fillText(cur.company.toUpperCase()+' · SITE ID',W/2,H-sc(10,sy));ctx.textAlign='left';
-}
-
-/* ── QR ENCODER ── */
-(function(){
-  var EXP=new Uint8Array(512),LOG=new Uint8Array(256);
-  var x=1;for(var i=0;i<255;i++){EXP[i]=x;LOG[x]=i;x=(x<<1)^(x&0x80?0x11D:0);}for(var i=255;i<512;i++)EXP[i]=EXP[i-255];
-  function mul(a,b){return(a&&b)?EXP[LOG[a]+LOG[b]]:0;}
-  function gp(n){var p=[1];for(var i=0;i<n;i++){var q=[1,EXP[i]],r=new Array(p.length+q.length-1).fill(0);for(var j=0;j<p.length;j++)for(var k=0;k<q.length;k++)r[j+k]^=mul(p[j],q[k]);p=r;}return p;}
-  function rs(d,el){var g=gp(el),r=[...d,...new Array(el).fill(0)];for(var i=0;i<d.length;i++){var c=r[i];if(c)for(var j=1;j<=el;j++)r[i+j]^=mul(g[j],c);}return r.slice(d.length);}
-  var CAP=[0,16,28,44,64,86,108,124,154,182,216];
-  var ECB=[0,10,16,26,36,24,16,18,22,22,26];
-  window.buildQRMatrix=function(text){
-    var b=[];for(var i=0;i<text.length;i++){var c=text.charCodeAt(i);if(c<128)b.push(c);else if(c<0x800){b.push(0xC0|(c>>6));b.push(0x80|(c&63));}else{b.push(0xE0|(c>>12));b.push(0x80|((c>>6)&63));b.push(0x80|(c&63));}}
-    var ver=1;for(;ver<=10;ver++)if(b.length+2<=CAP[ver])break;if(ver>10)ver=10;
-    var db=CAP[ver],eb=ECB[ver],bits=[];
-    function ab(v,n){for(var i=n-1;i>=0;i--)bits.push((v>>i)&1);}
-    ab(4,4);ab(b.length,ver<10?8:16);for(var i=0;i<b.length;i++)ab(b[i],8);
-    for(var i=0;i<4&&bits.length<db*8;i++)bits.push(0);while(bits.length%8)bits.push(0);
-    var pads=[0xEC,0x11];for(var pi=0;bits.length<db*8;pi++)ab(pads[pi%2],8);
-    var data=[];for(var i=0;i<bits.length;i+=8){var v=0;for(var j=0;j<8;j++)v=(v<<1)|bits[i+j];data.push(v);}
-    var ec=rs(data,eb),cw=[...data,...ec],cwb=[];
-    for(var i=0;i<cw.length;i++)for(var j=7;j>=0;j--)cwb.push((cw[i]>>j)&1);
-    var sz=ver*4+17,m=Array.from({length:sz},function(){return new Array(sz).fill(-1);});
-    function s(r,c,v){if(r>=0&&r<sz&&c>=0&&c<sz)m[r][c]=v;}
-    function finder(ro,co){for(var r=-1;r<=7;r++)for(var c=-1;c<=7;c++){var v=r<0||r==7||c<0||c==7?0:r==0||r==6||c==0||c==6?1:r>=2&&r<=4&&c>=2&&c<=4?1:0;s(ro+r,co+c,v);}}
-    finder(0,0);finder(0,sz-7);finder(sz-7,0);
-    for(var i=8;i<sz-8;i++){s(6,i,i%2===0?1:0);s(i,6,i%2===0?1:0);}
-    s(4*ver+9,8,1);
-    var APT=[null,[],[],[6,22],[6,26],[6,30],[6,34],[6,22,38],[6,24,42],[6,26,46],[6,28,50]];
-    if(ver>=2){var ap=APT[ver];for(var ai=0;ai<ap.length;ai++)for(var aj=0;aj<ap.length;aj++){var ar=ap[ai],ac=ap[aj];if(m[ar][ac]!==-1)continue;for(var dr=-2;dr<=2;dr++)for(var dc=-2;dc<=2;dc++)s(ar+dr,ac+dc,Math.abs(dr)===2||Math.abs(dc)===2?1:dr===0&&dc===0?1:0);}}
-    var fc=[[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,7],[8,8],[7,8],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8],[8,sz-1],[8,sz-2],[8,sz-3],[8,sz-4],[8,sz-5],[8,sz-6],[8,sz-7],[sz-7,8],[sz-6,8],[sz-5,8],[sz-4,8],[sz-3,8],[sz-2,8],[sz-1,8]];
-    for(var i=0;i<fc.length;i++)if(m[fc[i][0]][fc[i][1]]===-1)s(fc[i][0],fc[i][1],0);
-    var bit=0,up=true;
-    for(var col=sz-1;col>=1;col-=2){if(col===6)col=5;for(var row=0;row<sz;row++){var r=up?sz-1-row:row;for(var dc=0;dc<=1;dc++){var c=col-dc;if(m[r][c]===-1){var bv=bit<cwb.length?cwb[bit++]:0;m[r][c]=(r+c)%2===0?bv^1:bv;}}}up=!up;}
-    for(var r=0;r<sz;r++)for(var c=0;c<sz;c++)if(m[r][c]===-1)m[r][c]=0;
-    var fmt=[1,0,1,0,1,0,0,0,0,0,1,0,0,1,0];
-    var fl=[[8,0],[8,1],[8,2],[8,3],[8,4],[8,5],[8,7],[8,8],[7,8],[5,8],[4,8],[3,8],[2,8],[1,8],[0,8]];
-    for(var i=0;i<15;i++)s(fl[i][0],fl[i][1],fmt[i]);
-    s(8,sz-8,1);for(var i=0;i<7;i++)s(8,sz-7+i,fmt[14-i]);for(var i=0;i<8;i++)s(sz-7+i,8,fmt[i<7?i:14]);
-    return{matrix:m,size:sz};
-  };
-})();
-
-function drawQR(id,text,px){
-  var el=document.getElementById(id);if(!el||!text)return;el.innerHTML='';
-  try{
-    var res=buildQRMatrix(text),mat=res.matrix,sz=res.size,q=4,tot=(sz+q*2)*px;
-    var canvas=document.createElement('canvas');canvas.width=tot;canvas.height=tot;canvas.style.display='block';
-    var ctx=canvas.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,tot,tot);ctx.fillStyle='#181818';
-    for(var r=0;r<sz;r++)for(var c=0;c<sz;c++)if(mat[r][c]===1)ctx.fillRect((c+q)*px,(r+q)*px,px,px);
-    el.appendChild(canvas);
-  }catch(e){console.error('QR:',e);}
+function drawB(ctx, W, H, sx, sy) {
+  ctx.fillStyle = '#181818'; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = '#0d0d0d'; ctx.fillRect(0, 0, W, sc(38, sy));
+  var qrPx = sc(5, sx), qrSz = QR.drawCtx(ctx, qrText, 0, 0, qrPx), qrX = Math.round((W - qrSz) / 2);
+  QR.drawCtx(ctx, qrText, qrX, sc(50, sy), qrPx);
+  ctx.fillStyle = 'rgba(255,255,255,.3)'; ctx.font = '600 ' + sc(7, sy) + 'px sans-serif'; ctx.textAlign = 'center';
+  ctx.fillText('SCAN TO VERIFY IDENTITY', W / 2, sc(50, sy) + qrSz + sc(14, sy));
+  ctx.fillStyle = '#fff'; ctx.font = '600 ' + sc(12, sy) + 'px sans-serif'; ctx.fillText(cur.name, W / 2, sc(50, sy) + qrSz + sc(28, sy));
+  ctx.fillStyle = '#B87A90'; ctx.font = '500 ' + sc(7, sy) + 'px sans-serif'; ctx.fillText(cur.role.toUpperCase(), W / 2, sc(50, sy) + qrSz + sc(40, sy));
+  ctx.fillStyle = 'rgba(255,255,255,.35)'; ctx.font = '600 ' + sc(7, sy) + 'px sans-serif';
+  ctx.fillText(cur.company.toUpperCase() + ' · SITE ID', W / 2, H - sc(10, sy)); ctx.textAlign = 'left';
 }
 </script>
 </body>
