@@ -5,8 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>LOPA Construction ID Maker</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Serif+Display&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
-<!-- QRCode.js — battle-tested, used by millions, guaranteed scannable -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <style>
 :root{--pink:#F6E5EA;--pink-mid:#DDB8C5;--pink-deep:#B87A90;--ink:#181818;--ink2:#4A4A4A;--ink3:#9A9A9A;--bg:#F4F4F2;--white:#FFF;--border:#E4E4E0;--green:#4CAF7D;--blue:#1A73E8}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -48,7 +46,6 @@ input:focus{border-color:var(--pink-deep);background:#fff}
 .tabs{display:flex;gap:8px}
 .tab{padding:6px 20px;border-radius:20px;border:1.5px solid var(--border);background:var(--white);color:var(--ink2);font-family:'Barlow Condensed',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
 .tab.on{background:var(--ink);color:#fff;border-color:var(--ink)}
-/* Cards use natural height — no overflow:hidden that clips QR */
 .id-front{width:280px;border-radius:8px;background:#fff;box-shadow:0 12px 40px rgba(0,0,0,.15);display:flex;flex-direction:column}
 .f-topbar{height:3px;background:var(--ink);border-radius:8px 8px 0 0;flex-shrink:0}
 .f-header{padding:8px 14px 7px;border-bottom:1px solid #F0EFED;display:flex;justify-content:space-between;align-items:flex-end;flex-shrink:0}
@@ -70,23 +67,28 @@ input:focus{border-color:var(--pink-deep);background:#fff}
 .f-auth{display:flex;align-items:center;gap:3px;margin-top:2px;font-size:6px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--green)}
 .dot{width:4px;height:4px;border-radius:50%;background:var(--green);animation:blink 2.4s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
-/* QR row: centered, natural size, no overflow clipping */
-.f-qr-row{background:#F9F9F8;border-top:1px solid #F0EFED;display:flex;justify-content:center;padding:10px;flex-shrink:0;border-radius:0 0 0 0}
+.f-qr-row{background:#F9F9F8;border-top:1px solid #F0EFED;display:flex;justify-content:center;padding:10px;flex-shrink:0}
 .f-bottombar{height:2px;background:var(--pink-mid);border-radius:0 0 8px 8px;flex-shrink:0}
-/* Back card */
-.id-back{width:280px;border-radius:8px;background:var(--ink);box-shadow:0 12px 40px rgba(0,0,0,.15);display:flex;flex-direction:column}
+/* Back card - NO border-radius on corners that touch QR, NO overflow clipping */
+.id-back{width:280px;border-radius:8px;background:var(--ink);box-shadow:0 12px 40px rgba(0,0,0,.15);display:flex;flex-direction:column;overflow:visible}
 .b-mag{height:32px;background:#0d0d0d;border-radius:8px 8px 0 0;flex-shrink:0}
 .b-body{display:flex;flex-direction:column;align-items:center;padding:14px;gap:10px}
-.b-lbl{font-family:'Barlow Condensed',sans-serif;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.3)}
-.b-qr{display:flex;justify-content:center;background:#fff;padding:8px;border-radius:4px}
+/* QR scan button - tapping opens a full-screen scannable QR overlay */
+.b-qr-btn{background:#fff;border:none;border-radius:6px;padding:14px 24px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;width:100%}
+.b-qr-btn .qr-preview{width:160px;height:160px;display:flex;align-items:center;justify-content:center}
+.b-qr-btn .qr-tap{font-family:'Barlow Condensed',sans-serif;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3)}
 .b-name{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:600;letter-spacing:2px;color:#fff;text-transform:uppercase;text-align:center}
 .b-role{font-size:7.5px;letter-spacing:2px;color:var(--pink-deep);text-transform:uppercase;font-weight:500;text-align:center}
 .b-notice{font-size:6.5px;color:rgba(255,255,255,.18);text-align:center;line-height:1.65}
 .b-foot{background:rgba(255,255,255,.04);border-top:1px solid rgba(255,255,255,.06);padding:7px 14px;text-align:center;border-radius:0 0 8px 8px;flex-shrink:0}
 .b-foot-txt{font-family:'Barlow Condensed',sans-serif;font-size:7px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.35)}
-/* QRCode.js renders a table+canvas — make sure it's never scaled */
-#qr-front-wrap table,#qr-back-wrap table{border:none!important}
-#qr-front-wrap canvas,#qr-back-wrap canvas{display:block!important;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important}
+/* FULLSCREEN QR OVERLAY for scanning */
+.qr-overlay{display:none;position:fixed;inset:0;background:#000;z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:20px}
+.qr-overlay.open{display:flex}
+.qr-overlay-inner{background:#fff;padding:20px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.qr-overlay canvas{display:block !important}
+.qr-overlay-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#666}
+.qr-overlay-close{padding:12px 32px;background:#181818;color:#fff;border:none;border-radius:6px;font-family:'Barlow Condensed',sans-serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;cursor:pointer}
 .panel{background:var(--white);border:1px solid var(--border);border-radius:10px;padding:20px 22px;width:100%;max-width:440px}
 .panel-title{font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:14px;font-weight:600}
 .btn-upload{width:100%;padding:12px;border:none;border-radius:7px;font-family:'Barlow Condensed',sans-serif;font-size:14px;letter-spacing:3px;text-transform:uppercase;cursor:pointer;margin-bottom:10px}
@@ -121,6 +123,17 @@ input:focus{border-color:var(--pink-deep);background:#fff}
 </style>
 </head>
 <body>
+
+<!-- Fullscreen QR overlay for scanning -->
+<div class="qr-overlay" id="qrOverlay">
+  <div class="qr-overlay-inner">
+    <div class="qr-overlay-label">Point your camera at this code</div>
+    <div id="qrFullscreen"></div>
+    <div class="qr-overlay-label" id="qrOverlayText"></div>
+  </div>
+  <button class="qr-overlay-close" onclick="document.getElementById('qrOverlay').classList.remove('open')">Close</button>
+</div>
+
 <div class="overlay" id="cidModal">
   <div class="modal">
     <h2>Connect Google Drive</h2>
@@ -199,7 +212,6 @@ input:focus{border-color:var(--pink-deep);background:#fff}
         <div class="tab on" id="tabFront" onclick="switchTab('front')">Front</div>
         <div class="tab" id="tabBack" onclick="switchTab('back')">Back</div>
       </div>
-
       <div class="id-front" id="cardFront">
         <div class="f-topbar"></div>
         <div class="f-header"><div class="f-company" id="c-co">COMPANY</div><div class="f-sitetag">SITE ID</div></div>
@@ -218,19 +230,17 @@ input:focus{border-color:var(--pink-deep);background:#fff}
         <div class="f-qr-row"><div id="qr-front-wrap"></div></div>
         <div class="f-bottombar"></div>
       </div>
-
       <div class="id-back" id="cardBack" style="display:none">
         <div class="b-mag"></div>
         <div class="b-body">
           <div class="b-lbl">Scan to Verify Identity</div>
-          <div class="b-qr"><div id="qr-back-wrap"></div></div>
+          <div id="qr-back-wrap" style="background:#fff;padding:10px;border-radius:6px;display:flex;justify-content:center;align-items:center"></div>
           <div class="b-name" id="b-nm">FULL NAME</div>
           <div class="b-role" id="b-rl">ROLE</div>
           <div class="b-notice">Property of issuing company. Unauthorized use prohibited.</div>
         </div>
         <div class="b-foot"><div class="b-foot-txt" id="b-co">COMPANY · SITE ID</div></div>
       </div>
-
       <div class="panel">
         <div class="panel-title">Upload &amp; Export</div>
         <button class="btn-upload off" id="uploadBtn" onclick="uploadAndQR()">☁ Upload to Drive &amp; Generate QR</button>
@@ -248,11 +258,12 @@ input:focus{border-color:var(--pink-deep);background:#fff}
   </main>
 </div>
 
+<!-- QRCode.js from CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://accounts.google.com/gsi/client" async onload="gisReady=true"></script>
 <script>
 var photo=null,cur={},qrText='',accessToken=null,tokenClient=null,gisReady=false;
 var FOLDER_ID='1rHgu7hLSmeDXWhxTzUNyLwfz76Tsg93C';
-var qrFront=null,qrBack=null;
 
 (function(){
   var t=new Date();document.getElementById('di').value=t.toISOString().slice(0,10);
@@ -260,18 +271,22 @@ var qrFront=null,qrBack=null;
   var cid=localStorage.getItem('lopa_cid');if(cid)document.getElementById('cidInput').value=cid;
 })();
 
-/* ── QR using QRCode.js library (guaranteed scannable) ── */
-function makeQR(elementId, text, size){
-  var el=document.getElementById(elementId);
-  el.innerHTML='';
-  new QRCode(el,{text:text,width:size,height:size,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});
+function makeQR(id,text,size){
+  var el=document.getElementById(id);if(!el)return;el.innerHTML='';
+  if(window.QRCode){new QRCode(el,{text:text,width:size,height:size,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});}
 }
 
-/* ── AUTH ── */
+function openQRFullscreen(){
+  var fs=document.getElementById('qrFullscreen');fs.innerHTML='';
+  document.getElementById('qrOverlayText').textContent=qrText.length>50?qrText.slice(0,50)+'…':qrText;
+  if(window.QRCode){new QRCode(fs,{text:qrText,width:300,height:300,colorDark:'#000000',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M});}
+  document.getElementById('qrOverlay').classList.add('open');
+}
+
 function handleSignIn(){var cid=(localStorage.getItem('lopa_cid')||'').trim();if(!cid){document.getElementById('cidModal').classList.add('open');return;}doSignIn(cid);}
 function doSignIn(cid){
   if(!gisReady||!window.google?.accounts?.oauth2){setTimeout(function(){doSignIn(cid);},600);return;}
-  if(!tokenClient){tokenClient=google.accounts.oauth2.initTokenClient({client_id:cid,scope:'https://www.googleapis.com/auth/drive.file',callback:function(r){if(r&&r.access_token){accessToken=r.access_token;setAuth('ok','Connected! Ready to upload.');updateBtn();}else setAuth('err','Sign-in failed.');}})}
+  if(!tokenClient){tokenClient=google.accounts.oauth2.initTokenClient({client_id:cid,scope:'https://www.googleapis.com/auth/drive.file',callback:function(r){if(r&&r.access_token){accessToken=r.access_token;setAuth('ok','Connected!');updateBtn();}else setAuth('err','Sign-in failed.');}})}
   tokenClient.requestAccessToken();
 }
 function setAuth(st,msg){
@@ -283,8 +298,6 @@ function setAuth(st,msg){
   else{btn.textContent='Sign in with Google';btn.style.cssText='margin-top:8px;padding:8px 14px;background:var(--blue);color:#fff;border:none;border-radius:5px;font-size:12px;font-weight:600;cursor:pointer;width:100%';btn.onclick=handleSignIn;}
 }
 function saveCid(){var cid=document.getElementById('cidInput').value.trim();if(!cid){alert('Please paste your Client ID.');return;}localStorage.setItem('lopa_cid',cid);document.getElementById('cidModal').classList.remove('open');tokenClient=null;doSignIn(cid);}
-
-/* ── FORM ── */
 function onPhoto(e){var f=e.target.files[0];if(!f)return;var r=new FileReader();r.onload=function(ev){photo=ev.target.result;document.getElementById('puIcon').innerHTML='<img src="'+photo+'" alt="">';document.getElementById('puLbl').textContent='Photo loaded ✓';};r.readAsDataURL(f);}
 function pickRole(el,role){document.querySelectorAll('.pill').forEach(function(p){p.classList.remove('on');});el.classList.add('on');document.getElementById('roleInput').value=role;}
 function gv(id){return document.getElementById(id).value.trim();}
@@ -297,18 +310,15 @@ function generate(){
   qrText='LOPA:'+empId+'|'+name;
   st('c-co',company.toUpperCase());st('c-proj',project.toUpperCase());st('c-nm',name);st('c-rl',role.toUpperCase());st('c-id',empId);st('c-ct',contact);st('c-is',fmtDate(issued));st('c-vl',valid?fmtDate(valid):'—');st('c-idn',empId);st('b-nm',name);st('b-rl',role.toUpperCase());st('b-co',company.toUpperCase()+' · SITE ID');
   var ph=document.getElementById('c-ph');if(photo){ph.innerHTML='<img src="'+photo+'" style="width:100%;height:100%;object-fit:cover;display:block">';ph.style.fontSize='0';}else{ph.innerHTML='👷';ph.style.fontSize='';}
-  /* QRCode.js: 160px for front (fits in card), 200px for back */
-  makeQR('qr-front-wrap',qrText,160);
-  makeQR('qr-back-wrap',qrText,200);
+  makeQR('qr-front-wrap',qrText,140);
+  makeQR('qr-back-wrap',qrText,140);
   document.getElementById('emptyState').style.display='none';
   document.getElementById('previewWrap').style.display='flex';
   document.getElementById('sbox').className='sbox';document.getElementById('linkBox').style.display='none';updateBtn();
 }
-
 function switchTab(t){document.getElementById('cardFront').style.display=t==='front'?'flex':'none';document.getElementById('cardBack').style.display=t==='back'?'flex':'none';document.getElementById('tabFront').className='tab'+(t==='front'?' on':'');document.getElementById('tabBack').className='tab'+(t==='back'?' on':'');}
 function updateBtn(){var btn=document.getElementById('uploadBtn'),note=document.getElementById('noAuthNote');if(accessToken){btn.className='btn-upload ready';btn.textContent='☁ Upload to Drive & Generate QR';note.style.display='none';}else{btn.className='btn-upload off';btn.textContent='☁ Sign in first to upload';note.style.display='block';}}
 
-/* ── UPLOAD ── */
 async function uploadAndQR(){
   if(!accessToken){handleSignIn();return;}if(!cur.name){alert('Generate an ID first.');return;}
   showStat('uploading','⏳ Rendering card images…');
@@ -320,9 +330,9 @@ async function uploadAndQR(){
     await makePublic(fid);
     var link='https://drive.google.com/drive/folders/'+fid;
     qrText=link;
-    makeQR('qr-front-wrap',qrText,160);
-    makeQR('qr-back-wrap',qrText,200);
-    showStat('done','✅ Done! Scan the QR — opens Drive folder with both ID images.');
+    makeQR('qr-front-wrap',qrText,140);
+    makeQR('qr-back-wrap',qrText,140);
+    showStat('done','✅ Done! On the Back tab, tap the QR to open it full screen and scan.');
     var lb=document.getElementById('linkBox');lb.innerHTML='<strong>Drive folder:</strong> <a href="'+link+'" target="_blank">Open ↗</a>';lb.style.display='block';updateBtn();
   }catch(e){showStat('err','❌ '+e.message);accessToken=null;tokenClient=null;setAuth('idle');updateBtn();}
 }
@@ -331,29 +341,19 @@ async function uploadPNG(dataUrl,filename,parentId){var b64=dataUrl.split(',')[1
 async function makePublic(id){await fetch('https://www.googleapis.com/drive/v3/files/'+id+'/permissions',{method:'POST',headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({role:'reader',type:'anyone'})});}
 function showStat(type,msg){var b=document.getElementById('sbox');b.className='sbox show '+type;b.textContent=msg;}
 
-/* ── CANVAS RENDERING FOR PNG EXPORT ── */
 function renderPNG(side){
   return new Promise(function(resolve,reject){
     var W=638,H=1011,canvas=document.createElement('canvas');canvas.width=W;canvas.height=H;
     var ctx=canvas.getContext('2d');
-    /* Get the QR canvas from QRCode.js */
     var qrEl=document.getElementById(side==='front'?'qr-front-wrap':'qr-back-wrap');
-    var qrCanvas=qrEl.querySelector('canvas');
-    function go(img){
-      try{
-        side==='front'?drawF(ctx,W,H,img,qrCanvas):drawB(ctx,W,H,qrCanvas);
-        resolve(canvas.toDataURL('image/png'));
-      }catch(e){reject(e);}
-    }
-    if(cur.photo&&side==='front'){var img=new Image();img.onload=function(){go(img);};img.onerror=function(){go(null);};img.src=cur.photo;}
-    else go(null);
+    var qrCanvas=qrEl?qrEl.querySelector('canvas'):null;
+    function go(img){try{side==='front'?drawF(ctx,W,H,img,qrCanvas):drawB(ctx,W,H,qrCanvas);resolve(canvas.toDataURL('image/png'));}catch(e){reject(e);}}
+    if(cur.photo&&side==='front'){var img=new Image();img.onload=function(){go(img);};img.onerror=function(){go(null);};img.src=cur.photo;}else go(null);
   });
 }
 function exportPNG(side){if(!cur.name){alert('Generate an ID first.');return;}renderPNG(side).then(function(url){var a=document.createElement('a');a.download='LOPA-ID-'+cur.empId+'-'+side.toUpperCase()+'.png';a.href=url;a.click();});}
-
 function sc(v,s){return Math.round(v*s);}
 function rr(ctx,x,y,w,h,rad){ctx.beginPath();ctx.moveTo(x+rad,y);ctx.lineTo(x+w-rad,y);ctx.arcTo(x+w,y,x+w,y+rad,rad);ctx.lineTo(x+w,y+h-rad);ctx.arcTo(x+w,y+h,x+w-rad,y+h,rad);ctx.lineTo(x+rad,y+h);ctx.arcTo(x,y+h,x,y+h-rad,rad);ctx.lineTo(x,y+rad);ctx.arcTo(x,y,x+rad,y,rad);ctx.closePath();}
-
 function drawF(ctx,W,H,img,qrCanvas){
   var sx=W/280,sy=H/450;
   ctx.fillStyle='#fff';ctx.fillRect(0,0,W,H);ctx.fillStyle='#181818';ctx.fillRect(0,0,W,sc(3,sy));
@@ -370,18 +370,17 @@ function drawF(ctx,W,H,img,qrCanvas){
   for(var i=0;i<rows.length;i++){ctx.fillStyle='#9A9A9A';ctx.font='600 '+sc(6.5,sy)+'px sans-serif';ctx.fillText(rows[i][0],sc(14,sx),rowY+sc(9,sy));ctx.fillStyle='#181818';ctx.font='500 '+sc(7.5,sy)+'px sans-serif';ctx.textAlign='right';ctx.fillText(rows[i][1],W-sc(14,sx),rowY+sc(9,sy));ctx.textAlign='left';if(i<rows.length-1){ctx.fillStyle='#F4F3F1';ctx.fillRect(sc(14,sx),rowY+sc(13,sy),W-sc(28,sx),1);}rowY+=sc(14,sy);}
   var fY=rowY+sc(6,sy);ctx.fillStyle='#F0EFED';ctx.fillRect(0,fY,W,1);ctx.fillStyle='#181818';ctx.font='700 '+sc(8.5,sy)+'px sans-serif';ctx.fillText(cur.empId,sc(14,sx),fY+sc(14,sy));
   ctx.fillStyle='#4CAF7D';ctx.beginPath();ctx.arc(sc(14,sx)+sc(3,sx),fY+sc(25,sy),sc(3,sy),0,Math.PI*2);ctx.fill();ctx.font='600 '+sc(6,sy)+'px sans-serif';ctx.fillText('AUTHORIZED',sc(14,sx)+sc(10,sx),fY+sc(27,sy));
-  /* Draw QR from QRCode.js canvas */
-  if(qrCanvas){var qrSize=sc(160,sx),qrX=Math.round((W-qrSize)/2),qrY=fY+sc(36,sy);ctx.fillStyle='#F9F9F8';ctx.fillRect(0,qrY-sc(8,sy),W,H-qrY+sc(8,sy)-sc(2,sy));ctx.fillStyle='#F0EFED';ctx.fillRect(0,qrY-sc(8,sy),W,1);ctx.drawImage(qrCanvas,qrX,qrY,qrSize,qrSize);}
+  if(qrCanvas){var qrSz=sc(200,sx),qrX=Math.round((W-qrSz)/2),qrY=fY+sc(36,sy);ctx.fillStyle='#F9F9F8';ctx.fillRect(0,qrY-sc(8,sy),W,H-qrY+sc(8,sy)-sc(2,sy));ctx.fillStyle='#F0EFED';ctx.fillRect(0,qrY-sc(8,sy),W,1);ctx.drawImage(qrCanvas,qrX,qrY,qrSz,qrSz);}
   ctx.fillStyle='#DDB8C5';ctx.fillRect(0,H-sc(2,sy),W,sc(2,sy));
 }
 function drawB(ctx,W,H,qrCanvas){
   var sx=W/280,sy=H/450;
   ctx.fillStyle='#181818';ctx.fillRect(0,0,W,H);ctx.fillStyle='#0d0d0d';ctx.fillRect(0,0,W,sc(38,sy));
-  if(qrCanvas){var qrSize=sc(200,sx),qrX=Math.round((W-qrSize)/2),qrY=sc(50,sy);ctx.fillStyle='#fff';ctx.fillRect(qrX-sc(8,sx),qrY-sc(8,sy),qrSize+sc(16,sx),qrSize+sc(16,sy));ctx.drawImage(qrCanvas,qrX,qrY,qrSize,qrSize);}
-  var below=sc(50,sy)+(qrCanvas?sc(200,sx):0);
-  ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='600 '+sc(7,sy)+'px sans-serif';ctx.textAlign='center';ctx.fillText('SCAN TO VERIFY IDENTITY',W/2,below+sc(20,sy));
-  ctx.fillStyle='#fff';ctx.font='600 '+sc(13,sy)+'px sans-serif';ctx.fillText(cur.name,W/2,below+sc(38,sy));
-  ctx.fillStyle='#B87A90';ctx.font='500 '+sc(7.5,sy)+'px sans-serif';ctx.fillText(cur.role.toUpperCase(),W/2,below+sc(50,sy));
+  if(qrCanvas){var qrSz=sc(260,sx),qrX=Math.round((W-qrSz)/2),qrY=sc(50,sy);ctx.fillStyle='#fff';ctx.fillRect(qrX-sc(10,sx),qrY-sc(10,sy),qrSz+sc(20,sx),qrSz+sc(20,sy));ctx.drawImage(qrCanvas,qrX,qrY,qrSz,qrSz);}
+  var below=sc(50,sy)+sc(280,sx);
+  ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='600 '+sc(7,sy)+'px sans-serif';ctx.textAlign='center';ctx.fillText('SCAN TO VERIFY IDENTITY',W/2,below+sc(18,sy));
+  ctx.fillStyle='#fff';ctx.font='600 '+sc(13,sy)+'px sans-serif';ctx.fillText(cur.name,W/2,below+sc(35,sy));
+  ctx.fillStyle='#B87A90';ctx.font='500 '+sc(7.5,sy)+'px sans-serif';ctx.fillText(cur.role.toUpperCase(),W/2,below+sc(47,sy));
   ctx.fillStyle='rgba(255,255,255,.35)';ctx.font='600 '+sc(7,sy)+'px sans-serif';ctx.fillText(cur.company.toUpperCase()+' · SITE ID',W/2,H-sc(10,sy));ctx.textAlign='left';
 }
 </script>
