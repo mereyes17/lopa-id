@@ -310,8 +310,8 @@ function generate(){
   qrText='LOPA:'+empId+'|'+name;
   st('c-co',company.toUpperCase());st('c-proj',project.toUpperCase());st('c-nm',name);st('c-rl',role.toUpperCase());st('c-id',empId);st('c-ct',contact);st('c-is',fmtDate(issued));st('c-vl',valid?fmtDate(valid):'—');st('c-idn',empId);st('b-nm',name);st('b-rl',role.toUpperCase());st('b-co',company.toUpperCase()+' · SITE ID');
   var ph=document.getElementById('c-ph');if(photo){ph.innerHTML='<img src="'+photo+'" style="width:100%;height:100%;object-fit:cover;display:block">';ph.style.fontSize='0';}else{ph.innerHTML='👷';ph.style.fontSize='';}
-  makeQR('qr-front-wrap',qrText,140);
-  makeQR('qr-back-wrap',qrText,140);
+  makeQR('qr-front-wrap',qrText,100);
+  makeQR('qr-back-wrap',qrText,120);
   document.getElementById('emptyState').style.display='none';
   document.getElementById('previewWrap').style.display='flex';
   document.getElementById('sbox').className='sbox';document.getElementById('linkBox').style.display='none';updateBtn();
@@ -321,23 +321,35 @@ function updateBtn(){var btn=document.getElementById('uploadBtn'),note=document.
 
 async function uploadAndQR(){
   if(!accessToken){handleSignIn();return;}if(!cur.name){alert('Generate an ID first.');return;}
-  showStat('uploading','⏳ Rendering card images…');
+  showStat('uploading','⏳ Rendering front card…');
   try{
-    var fp=await renderPNG('front'),bp=await renderPNG('back');
-    showStat('uploading','⏳ Creating Drive folder…');var fid=await createFolder(cur.empId+' — '+cur.name);
-    showStat('uploading','⏳ Uploading front…');await uploadPNG(fp,cur.empId+'-FRONT.png',fid);
-    showStat('uploading','⏳ Uploading back…');await uploadPNG(bp,cur.empId+'-BACK.png',fid);
-    await makePublic(fid);
-    var link='https://drive.google.com/drive/folders/'+fid;
+    var fp=await renderPNG('front');
+    showStat('uploading','⏳ Uploading to Google Drive…');
+    var fileId=await uploadPNGToRoot(fp, cur.empId+'-'+cur.name.replace(/\s+/g,'-')+'.png');
+    await makePublic(fileId);
+    /* Use direct image view link — opens the image immediately when scanned */
+    var link='https://drive.google.com/uc?export=view&id='+fileId;
     qrText=link;
-    makeQR('qr-front-wrap',qrText,140);
-    makeQR('qr-back-wrap',qrText,140);
-    showStat('done','✅ Done! On the Back tab, tap the QR to open it full screen and scan.');
-    var lb=document.getElementById('linkBox');lb.innerHTML='<strong>Drive folder:</strong> <a href="'+link+'" target="_blank">Open ↗</a>';lb.style.display='block';updateBtn();
+    makeQR('qr-front-wrap',qrText,100);
+    makeQR('qr-back-wrap',qrText,120);
+    showStat('done','✅ Done! QR now links directly to the front ID image.');
+    var lb=document.getElementById('linkBox');
+    lb.innerHTML='<strong>Direct image link:</strong> <a href="'+link+'" target="_blank">Open to test ↗</a>';
+    lb.style.display='block';updateBtn();
   }catch(e){showStat('err','❌ '+e.message);accessToken=null;tokenClient=null;setAuth('idle');updateBtn();}
 }
-async function createFolder(name){var res=await fetch('https://www.googleapis.com/drive/v3/files?fields=id',{method:'POST',headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({name:name,mimeType:'application/vnd.google-apps.folder',parents:[FOLDER_ID]})});if(!res.ok)throw new Error('Folder failed');var d=await res.json();if(!d.id)throw new Error('No folder ID');return d.id;}
-async function uploadPNG(dataUrl,filename,parentId){var b64=dataUrl.split(',')[1],bin=atob(b64),bytes=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);var blob=new Blob([bytes],{type:'image/png'}),meta=new Blob([JSON.stringify({name:filename,parents:[parentId],mimeType:'image/png'})],{type:'application/json'}),form=new FormData();form.append('metadata',meta);form.append('file',blob);var res=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',{method:'POST',headers:{'Authorization':'Bearer '+accessToken},body:form});if(!res.ok)throw new Error('Upload failed');}
+async function uploadPNGToRoot(dataUrl,filename){
+  var b64=dataUrl.split(',')[1],bin=atob(b64),bytes=new Uint8Array(bin.length);
+  for(var i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);
+  var blob=new Blob([bytes],{type:'image/png'});
+  var meta=new Blob([JSON.stringify({name:filename,parents:[FOLDER_ID],mimeType:'image/png'})],{type:'application/json'});
+  var form=new FormData();form.append('metadata',meta);form.append('file',blob);
+  var res=await fetch('https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id',{
+    method:'POST',headers:{'Authorization':'Bearer '+accessToken},body:form
+  });
+  if(!res.ok)throw new Error('Upload failed ('+res.status+')');
+  var d=await res.json();if(!d.id)throw new Error('No file ID');return d.id;
+}
 async function makePublic(id){await fetch('https://www.googleapis.com/drive/v3/files/'+id+'/permissions',{method:'POST',headers:{'Authorization':'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({role:'reader',type:'anyone'})});}
 function showStat(type,msg){var b=document.getElementById('sbox');b.className='sbox show '+type;b.textContent=msg;}
 
